@@ -1,0 +1,9 @@
+# local package
+-e .
+
+# external requirements
+torch
+numpy
+nibabel
+dipy
+scipy
