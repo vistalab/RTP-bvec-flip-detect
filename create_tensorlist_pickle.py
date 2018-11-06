@@ -8,6 +8,7 @@ tensorList, names = getTensorList(tensorDir, giveNames=True)
 pickle.dump([tensorList, names], open("tensorsAndNamesFull.p", "wb"))
 '''
 
+
 tensorList, names = pickle.load(open("tensorsAndNamesFull.p", "rb"))
 resizedList = []
 for t in tensorList:
