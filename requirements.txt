@@ -7,3 +7,4 @@ numpy
 nibabel
 dipy
 scipy
+zipfile
