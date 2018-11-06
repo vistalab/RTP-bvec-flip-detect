@@ -37,4 +37,3 @@ def predictFromArchive(archivPath, net, wantedShape=(41, 53, 38, 6), crop=(slice
             print(f"{predictionStringArrProfessional[4]} for {name[i]}. ({100-predCertainty}% unsure")
         else:
             print(f"I am {predCertainty:.3f}% pseudo sure that {predictionStringArrProfessional[pred]} for {name[i]}.")
-        print(f"[Pseudo certainty is at {predCertainty}% for {predictionStringArrOld[pred]}]")

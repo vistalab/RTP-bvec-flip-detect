@@ -68,7 +68,6 @@ def resizeTensors(tensors, wantedShape):
     count = 0
     oldShapes = []
     newShapes = []
-    print("Resizing..")
     for t in tensors:
         if t.shape != wantedShape:
             count += 1
@@ -81,7 +80,6 @@ def resizeTensors(tensors, wantedShape):
         resizedTensors.append(t)
     for i in range(count):
         print(f"{oldShapes[i]} -> {newShapes[i]}")
-    print(f"Resized {count} out of {len(tensors)} tensors. (This takes quite long)")
     return resizedTensors
 
 
