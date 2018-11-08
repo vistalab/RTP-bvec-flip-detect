@@ -1,13 +1,14 @@
+
 FROM python:3.6
 
 
-WORKDIR /usr/src/
+WORKDIR /flywheel/v0
 
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY detector ./detector
-COPY detectWithinDir.py ./
-# COPY dtiInit_02-Nov-2018_20-39-23.zip ./
+COPY detectWithinDir.py ./run.py
+COPY manifest.json ./
 
-CMD ["python", "detectWithinDir.py"]
+CMD ["python", "run.py"]
