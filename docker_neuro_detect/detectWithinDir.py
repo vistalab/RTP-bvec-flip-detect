@@ -1,10 +1,10 @@
-from detector.simple_net import SimpleNet
-from detector.predictFromArchive import predictFromArchive
+from simple_net import SimpleNet
+from predictFromArchive import predictFromArchive
 import torch
 from glob import glob
 import os
 
-networkWeights = 'detector/trained_simplenet.torch'
+networkWeights = 'trained_simplenet.torch'
 wantedShape = (41, 53, 38, 6)
 crop = (slice(4, 28), slice(20, 44), slice(7, 31))
 resizeFactor = 2

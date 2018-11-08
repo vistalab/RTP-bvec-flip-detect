@@ -2,7 +2,7 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 from torch.autograd import Variable
-from .preprocess import resizeTensors, normalizeByIndividualMean, cropBlockResize, extractNiftiFromZipArchive, getArrayFromNifti
+from preprocess import resizeTensors, normalizeByIndividualMean, cropBlockResize, extractNiftiFromZipArchive, getArrayFromNifti
 import os
 
 
