@@ -8,7 +8,9 @@ COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY detector/* ./
-COPY detectWithinDir.py ./run.py
+COPY detectWithinDir.py ./run
 COPY manifest.json ./
 
-CMD ["python", "run.py"]
+RUN chmod +x *
+
+CMD ["python", "run"]
