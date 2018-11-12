@@ -5,7 +5,7 @@
 
 # FROM ubuntu:trusty
 FROM flywheel/matlab-mcr:v82
-MAINTAINER Michael Perry <lmperry@stanford.edu>
+MAINTAINER Fabian Reith <reith@stanford.edu>
 
 # Install dependencies
 RUN apt-get -qq update && apt-get -qq install -y \
@@ -15,7 +15,8 @@ RUN apt-get -qq update && apt-get -qq install -y \
     curl \
     zip \
     gzip \
-    python
+    python \
+    bzip2
 
 # ADD the dtiInit Matlab Stand-Alone (MSA) into the container.
 ADD https://github.com/vistalab/vistasoft/raw/97aa8a8/mrDiffusion/dtiInit/standalone/executables/dtiInit_glnxa64_v82 /usr/local/bin/dtiInit
@@ -26,6 +27,23 @@ ADD https://github.com/vistalab/vistasoft/raw/97aa8a8/mrAnatomy/Segment/bet2 /us
 # Add the MNI_EPI template and JSON schema files to the container
 ADD https://github.com/vistalab/vistasoft/raw/97aa8a8/mrDiffusion/templates/MNI_EPI.nii.gz /templates/
 ADD https://github.com/vistalab/vistasoft/raw/97aa8a8/mrDiffusion/dtiInit/standalone/dtiInitStandAloneJsonSchema.json /templates/
+
+# Add Miniconda
+RUN wget https://repo.continuum.io/miniconda/Miniconda3-4.5.4-Linux-x86_64.sh
+RUN bash Miniconda3-4.5.4-Linux-x86_64.sh -b
+RUN rm Miniconda3-4.5.4-Linux-x86_64.sh
+
+# Set path to conda
+ENV PATH $PATH:/root/miniconda3/bin
+
+# Updating Miniconda packages
+RUN conda update conda
+
+# Copy requirements
+COPY requirements.txt ./
+
+# pip install requirements
+RUN python3 -m pip install --no-cache-dir -r requirements.txt
 
 # Copy the help text to display when no args are passed in.
 COPY source/doc/help.txt /opt/help.txt
@@ -45,9 +63,11 @@ COPY source/bin/run \
     source/bin/parse_config.py \
     manifest.json \
     ${FLYWHEEL}/
+
 RUN chmod +x \
     ${FLYWHEEL}/run \
     ${FLYWHEEL}/parse_config.py
 
 # Configure entrypoint
 ENTRYPOINT ["/flywheel/v0/run"]
+

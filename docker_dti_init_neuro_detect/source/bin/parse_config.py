@@ -19,7 +19,7 @@ def parse_config(input_file, output_file, input_dir, output_dir, nifti_dir, bvec
         config_json = json.load(jsonfile)
 
     if MANIFEST:
-        print "Loading default configuration from %s" % input_file
+        print("Loading default configuration from %s" % input_file)
         manifest_config = dict.fromkeys(config_json['config'].keys())
         for k in manifest_config.iterkeys():
             manifest_config[k] = config_json['config'][k]['default']
@@ -27,7 +27,7 @@ def parse_config(input_file, output_file, input_dir, output_dir, nifti_dir, bvec
         config['params'] = manifest_config
     else:
         # Rename the config key to params
-        print "Parsing %s" % input_file
+        print("Parsing %s" % input_file)
         config = dict()
         if config_json['config'].has_key('config'):
             config['params'] = config_json['config']['config']

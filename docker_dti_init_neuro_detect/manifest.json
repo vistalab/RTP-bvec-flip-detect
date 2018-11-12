@@ -74,7 +74,7 @@
     },
     "eddyCorrect": {
       "description": "Motion and eddy-current correction. Options 0, 1, -1. 0=Only motion correction is done. 1=Do eddy-current and motion correction. -1=No motion or eddy correction. DEFAULT=1",
-      "default": 1,
+      "default": -1,
       "type": "integer"
     },
     "bsplineInterpFlag": {
@@ -90,17 +90,17 @@
     "dwOutMm-1": {
       "description": "Resolution of the output in mm. DEFAULT=2",
       "type": "integer",
-      "default": 2
+      "default": 4
     },
     "dwOutMm-2": {
       "description": "Resolution of the output in mm. DEFAULT=2",
       "type": "integer",
-      "default": 2
+      "default": 4
     },
     "dwOutMm-3": {
       "description": "Resolution of the output in mm. DEFAULT=2",
       "type": "integer",
-      "default": 2
+      "default": 4
     },
     "rotateBvecsWithRx": {
       "description": "Rotate the b-vectors according to the scanner prescription. 0=false, 1=true. DEFAULT=0",
