@@ -1,16 +1,22 @@
 {
-  "name": "dtiinit",
-  "label": "VISTALAB: dtiInit - Diffusion Data Initialization Pipeline",
-  "description": "VISTALAB's dtiInit (DTI Initialization) runs the VISTASOFT/mrDiffusion pre-processing pipeline on raw DWI data. This Gear allows all dtiInit parameters to be set from within the configuration UI. All outputs are archived in a zip file for easy download. dtiInit.json is saved for easy reference to configuration parameters used at runtime.",
-  "maintainer": "Michael Perry <lmperry@stanford.edu>",
-  "author": "VISTA Lab, Stanford University",
-  "url": "https://github.com/vistalab/vistasoft/wiki/dwi-Initialization",
-  "source": "https://github.com/scitran-apps/dtiinit",
-  "license": "GPL-2.0",
+  "name": "neuro-detect",
+  "label": "Neuro Detect: Detect flipped tensors in DWI data (dtiInit output).",
+  "description": "Neuro detect leverages the possibilities of deep learning to automatically detect and correct formatting errors of DWI MRI scan data. Generates a report with prediction strength and suggested action to remediate each dataset.",
+  "maintainer": "Fabian Reith",
+  "author": "Fabian Reith",
+  "url": "https://github.com/FabianRei/neuro_detect",
+  "source": "https://github.com/FabianRei/neuro_detect",
+  "license": "Other",
   "flywheel": "0",
-  "version": "0.2.2",
+  "version": "0.2.0",
   "custom": {
-    "docker-image": "scitran/dtiinit:v0.2.2"
+    "gear-builder": {
+      "image": "vistalab/neuro-detect:0.2.0"
+    },
+    "docker-image": "vistalab/neuro-detect:0.2.0",
+    "flywheel": {
+      "suite": "VISTA Lab"
+    }
   },
   "inputs": {
     "anatomical": {

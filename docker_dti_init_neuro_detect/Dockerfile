@@ -45,6 +45,11 @@ COPY requirements.txt ./
 # pip install requirements
 RUN python3 -m pip install --no-cache-dir -r requirements.txt
 
+# Copy python files
+RUN mkdir /detector
+COPY *.py /detector/
+COPY *.torch /detector/
+
 # Copy the help text to display when no args are passed in.
 COPY source/doc/help.txt /opt/help.txt
 

@@ -49,6 +49,9 @@ cp ${PARAMS_FILE} ${OUTPUT_DIR}
 # Execute the algorithm
 time /usr/local/bin/dtiInit $WORK_DIR 2>&1 | tee $OUTPUT_DIR/dtiInit.log
 
+# Check if something is flipped
+python3 /detector/detectWithinDir.py -p ${OUTPUT_DIR}
+
 # Check for the output zip file
 outputs=$(find $OUTPUT_DIR/* -maxdepth 0 -type f -name "*.zip")
 
