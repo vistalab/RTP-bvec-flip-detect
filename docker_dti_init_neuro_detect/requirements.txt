@@ -1,0 +1,6 @@
+nibabel
+torch
+torchvision
+numpy
+scikit-image
+dipy

@@ -1,0 +1,127 @@
+{
+  "name": "neuro-detect",
+  "label": "Neuro Detect: Detect flipped tensors in DWI data (dtiInit output).",
+  "description": "Neuro detect leverages the possibilities of deep learning to automatically detect and correct formatting errors of DWI MRI scan data. Generates a report with prediction strength and suggested action to remediate each dataset.",
+  "maintainer": "Fabian Reith",
+  "author": "Fabian Reith",
+  "url": "https://github.com/FabianRei/neuro_detect",
+  "source": "https://github.com/FabianRei/neuro_detect",
+  "license": "Other",
+  "flywheel": "0",
+  "version": "0.2.0",
+  "custom": {
+    "gear-builder": {
+      "image": "vistalab/neuro-detect:0.2.0"
+    },
+    "docker-image": "vistalab/neuro-detect:0.2.0",
+    "flywheel": {
+      "suite": "VISTA Lab"
+    }
+  },
+  "inputs": {
+    "anatomical": {
+      "description": "OPTIONAL: Anatomical (e.g., t1-weighted) NIfTI file. During the initial phase of processing the diffusion data (b=0 images) will be aligned to this image. By default the dwi data will be aligned to the MNI_EPI template.",
+      "base": "file",
+      "optional": true,
+      "type": {
+        "enum": [
+          "nifti"
+        ]
+      }
+    },
+    "dwi": {
+      "description": "REQUIRED: Raw diffusion NIfTI file.",
+      "base": "file",
+      "type": {
+        "enum": [
+          "nifti"
+        ]
+      }
+    },
+    "bvec": {
+      "description": "REQUIRED: File containing a list of diffusion b-vectors.",
+      "base": "file",
+      "type": {
+        "enum": [
+          "bvec"
+        ]
+      }
+    },
+    "bval": {
+      "description": "REQUIRED: File containing a list of diffusion b-values.",
+      "base": "file",
+      "type": {
+        "enum": [
+          "bval"
+        ]
+      }
+    }
+  },
+  "config": {
+    "flipLrApFlag": {
+      "description": "This flag will signal dtiRawBuildBvecs to reorient the gradient directions specified in the dwepi.grads file to logical space rather than keeping the directions in scanner space. Thus, the bvecs do not need to be reoriented for oblique prescriptions as with some other DTI sequences. However, this sequence assumes that the 2nd column in dwepi.grads is the phase-encode dim. If your phase-encode is the usual '2', then this is fine. But, if you run ASSET and change the phase encode to L-R (dim 1), you need to swap the first and second columns of dwepi.grads. Also, there appears to be a flip in the phase-encode dim, so you also need to flip the sign on the phase-encode column. DEFAULT=0",
+      "default": 0,
+      "type": "integer"
+    },
+    "numBootStrapSamples": {
+      "description": "Number of bootstrap iterations. DEFAULT=500",
+      "default": 500,
+      "type": "integer"
+    },
+    "fitMethod": {
+      "description": "Fit-method for tensor fitting. Options are ['ls', 'rt', 'lsrt']: 'ls': least-squares (default) 'rt': RESTORE robust tensor fitting and outlier rejection (Chang, Jones & Pierpaoli (2005) RESTORE: Robust Estimation of Tensors by Outlier Rejection. Magnetic Resonance in Medicine, v53). 'lsrt': does least-squares and robust tensor fitting in one go. DEFAULT='ls'",
+      "default": "ls",
+      "type": "string"
+    },
+    "nStep": {
+      "description": "The number of steps for the restore algorithm in the robust tensor fitting case. (dtiRawFitTensorRobust). DEFAULT=50",
+      "default": 50,
+      "type": "integer"
+    },
+    "eddyCorrect": {
+      "description": "Motion and eddy-current correction. Options 0, 1, -1. 0=Only motion correction is done. 1=Do eddy-current and motion correction. -1=No motion or eddy correction. DEFAULT=1",
+      "default": -1,
+      "type": "integer"
+    },
+    "bsplineInterpFlag": {
+      "description": "Method used for interpolation during resampling (dtiRawResample). 1=bspline. 0=trilinear. DEFAULT=0",
+      "default": 0,
+      "type": "integer"
+    },
+    "phaseEncodeDir": {
+      "description": "Phase encoding direction. (1=L/R='row', 2=A/P='col'). This value is read from the raw dti nifti field, you should specify it here if it does not exist. If you collected your DTI data using GE's ASSET, you should provide the phase-encode direction (1=L/R='row', 2=A/P='col'). Information about this, as well as the b-value and gradient code, can be found in the DICOM file header. DEFAULT=2",
+      "type": "integer",
+      "default": 2
+    },
+    "dwOutMm-1": {
+      "description": "Resolution of the output in mm. DEFAULT=2",
+      "type": "integer",
+      "default": 4
+    },
+    "dwOutMm-2": {
+      "description": "Resolution of the output in mm. DEFAULT=2",
+      "type": "integer",
+      "default": 4
+    },
+    "dwOutMm-3": {
+      "description": "Resolution of the output in mm. DEFAULT=2",
+      "type": "integer",
+      "default": 4
+    },
+    "rotateBvecsWithRx": {
+      "description": "Rotate the b-vectors according to the scanner prescription. 0=false, 1=true. DEFAULT=0",
+      "default": 0,
+      "type": "integer"
+    },
+    "rotateBvecsWithCanXform": {
+      "description": "Rotate the b-vectors according to the canonical xForm. 0=false, 1=true. DEFAULT=1",
+      "default": 1,
+      "type": "integer"
+    },
+    "noiseCalcMethod": {
+      "description": "Noise calculation method for robust tensor fitting. Options are 'corner' or 'b0' (default). There are 2 ways to calculate the noise. The first is based on the standard deviation of the signal in the corner of the image (noiseCalcMethod = 'corner'). This method works well as long as the corner of the image has not been padded with zeros. Currently GE zeros out the pixel intensity outside of the brain. So for new GE data we calculate the noise by taking the standard deviation of the b=0 images (noiseCalcMethod = 'b0') which means that we need a number of b0 acquisitions. If you are using robust tensor fitting you must decide how to calculate the image noise. If the corner of the image is padded with zeros then you should use the 'b0' method which calculates the noise based on the std of the b0 image. DEFAULT='b0'",
+      "type": "string",
+      "default": "b0"
+    }
+  }
+}
