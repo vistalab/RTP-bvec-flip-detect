@@ -20,4 +20,8 @@ net = SimpleNet(dimIn=dimIn, dimOut=dimOut).cpu()
 net.load_state_dict(torch.load(networkWeights, map_location='cpu'))
 archivPath = args.p
 for archiv in glob(os.path.join(archivPath, "dti*.zip")):
-    predictFromArchive(archiv, os.path.join(archivPath, "neuro-detect_report.txt"), net)
+    flipPreds = predictFromArchive(archiv, os.path.join(archivPath, "neuro-detect_report.txt"), net)
+    for key, val in flipPreds.items():
+        parentDir = os.path.dirname(os.path.abspath(archivPath))
+        bvecDir = os.path.join(parentDir, "input/bvec")
+        print(os.listdir(bvecDir))

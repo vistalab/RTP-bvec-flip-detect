@@ -16,7 +16,8 @@ RUN apt-get -qq update && apt-get -qq install -y \
     zip \
     gzip \
     python \
-    bzip2
+    bzip2 \
+    vim
 
 # ADD the dtiInit Matlab Stand-Alone (MSA) into the container.
 ADD https://github.com/vistalab/vistasoft/raw/97aa8a8/mrDiffusion/dtiInit/standalone/executables/dtiInit_glnxa64_v82 /usr/local/bin/dtiInit
