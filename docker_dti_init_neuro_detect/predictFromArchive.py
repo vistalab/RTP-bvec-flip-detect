@@ -29,13 +29,17 @@ def predictFromArchive(archivPath, report_file, net, wantedShape=(41, 53, 38, 6)
                                        "you should flip the z axis in the bvec",
                                        "you should check this subject manually"]
 
+    returnVals = {}
     with open(report_file, 'a') as rf:
         for i, name in enumerate([name]):
             predCertainty = F.softmax(net_out[i], dim=0)[prediction[i]].detach().numpy()*100
             pred = prediction[i]
             if predCertainty < 99:
+                returnVals[name[i]] = 4
                 print(f"{predictionStringArrProfessional[4]} for {name[i]}. ({100-predCertainty}% unsure")
                 rf.write(f"{predictionStringArrProfessional[4]} for {name[i]}. ({100-predCertainty}% unsure\n")
             else:
                 print(f"{predCertainty:.3f}% pseudo sure that {predictionStringArrProfessional[pred]} for {name[i]}.")
                 rf.write(f"{predCertainty:.3f}% pseudo sure that {predictionStringArrProfessional[pred]} for {name[i]}.\n")
+                returnVals[name[i]] = pred
+    return returnVals
