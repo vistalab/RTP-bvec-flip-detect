@@ -57,6 +57,8 @@ COPY source/doc/help.txt /opt/help.txt
 # Ensure that the executable files are executable
 RUN chmod +x /usr/local/bin/bet2 && chmod +x /usr/local/bin/dtiInit
 
+RUN mv /opt/mcr/v82/sys/os/glnxa64/libstdc++.so.6 /opt/mcr/v82/sys/os/glnxa64/libstdc++.so.6.ml
+
 # Configure environment variables for bet2
 ENV FSLOUTPUTTYPE NIFTI_GZ
 
