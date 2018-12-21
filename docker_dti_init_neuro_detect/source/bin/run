@@ -54,6 +54,13 @@ time /usr/local/bin/dtiInit $WORK_DIR 2>&1 | tee $OUTPUT_DIR/dtiInit.log
 # Check if something is flipped
 python3 /detector/detectWithinDir.py -p ${OUTPUT_DIR}
 
+if [[ $? != 0 ]]; then
+    echo "$CONTAINER  Errors encountered while running the detector. Exiting (1)"
+    exit 1
+else
+    echo "$CONTAINER  Success."
+fi
+
 # Check for the output zip file
 outputs=$(find $OUTPUT_DIR/* -maxdepth 0 -type f -name "*.zip")
 
