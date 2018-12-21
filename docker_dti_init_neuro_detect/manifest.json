@@ -8,12 +8,12 @@
   "source": "https://github.com/FabianRei/neuro_detect",
   "license": "Other",
   "flywheel": "0",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "custom": {
     "gear-builder": {
-      "image": "vistalab/neuro-detect:0.3.1"
+      "image": "vistalab/neuro-detect:0.4.0"
     },
-    "docker-image": "vistalab/neuro-detect:0.3.1",
+    "docker-image": "vistalab/neuro-detect:0.4.0",
     "flywheel": {
       "suite": "VISTA Lab"
     }
