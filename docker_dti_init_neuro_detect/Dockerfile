@@ -4,9 +4,9 @@
 #
 
 # FROM ubuntu:trusty
-FROM flywheel/matlab-mcr:v82
+FROM flywheel/matlab-mcr:v92.1
 MAINTAINER Fabian Reith <reith@stanford.edu>
-
+ENV LD_LIBRARY_PATH=""
 # Install dependencies
 RUN apt-get -qq update && apt-get -qq install -y \
     unzip \
@@ -58,7 +58,6 @@ COPY source/doc/help.txt /opt/help.txt
 # Ensure that the executable files are executable
 RUN chmod +x /usr/local/bin/bet2 && chmod +x /usr/local/bin/dtiInit
 
-RUN mv /opt/mcr/v82/sys/os/glnxa64/libstdc++.so.6 /opt/mcr/v82/sys/os/glnxa64/libstdc++.so.6.ml
 
 # Configure environment variables for bet2
 ENV FSLOUTPUTTYPE NIFTI_GZ

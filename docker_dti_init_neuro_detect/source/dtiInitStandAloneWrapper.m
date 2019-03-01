@@ -275,7 +275,7 @@ fprintf('Done.\n');
 
 %% Remove uncompressed output files
 
-rmdir(J.output_dir, 's');
+% rmdir(J.output_dir, 's');
 
 
 %% TODO: REPRODUCIBILITY!
