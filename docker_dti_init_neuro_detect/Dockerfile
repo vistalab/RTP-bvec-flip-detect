@@ -68,8 +68,8 @@ ENV FLYWHEEL /flywheel/v0
 RUN mkdir -p ${FLYWHEEL}
 
 # Copy and configure code
-COPY source/bin/run \
-    source/bin/parse_config.py \
+COPY source/run \
+    source/parse_config.py \
     manifest.json \
     ${FLYWHEEL}/
 
