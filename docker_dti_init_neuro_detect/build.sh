@@ -1,6 +1,13 @@
 #!/bin/bash
 # Builds the gear/container
 # The container can be exported using the export.sh script
+echo "You introduced version $1"
+read -p "Continue (y/n)?" choice
+case "$choice" in 
+    y|Y ) echo "yes";;
+    n|N ) echo "no";;
+    * ) echo "invalid";;
+esac
 cd source/
 . ./compile.sh
 cd ../
