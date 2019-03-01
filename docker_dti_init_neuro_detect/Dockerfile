@@ -20,7 +20,8 @@ RUN apt-get -qq update && apt-get -qq install -y \
     vim
 
 # ADD the dtiInit Matlab Stand-Alone (MSA) into the container.
-ADD https://github.com/vistalab/vistasoft/raw/97aa8a8/mrDiffusion/dtiInit/standalone/executables/dtiInit_glnxa64_v82 /usr/local/bin/dtiInit
+# ADD https://github.com/vistalab/vistasoft/raw/97aa8a8/mrDiffusion/dtiInit/standalone/executables/dtiInit_glnxa64_v82 /usr/local/bin/dtiInit
+COPY dtiinit/source/bin/dtiInitStandAloneWrapper /usr/local/bin/dtiInit
 
 # Add bet2 (FSL) to the container
 ADD https://github.com/vistalab/vistasoft/raw/97aa8a8/mrAnatomy/Segment/bet2 /usr/local/bin/
