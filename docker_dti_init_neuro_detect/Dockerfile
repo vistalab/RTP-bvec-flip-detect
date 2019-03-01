@@ -54,10 +54,6 @@ COPY *.torch /detector/
 # Copy the help text to display when no args are passed in.
 COPY source/doc/help.txt /opt/help.txt
 
-# Ensure that the executable files are executable
-RUN chmod +x /usr/local/bin/bet2 && chmod +x /usr/local/bin/dtiInit
-
-
 # Configure environment variables for bet2
 ENV FSLOUTPUTTYPE NIFTI_GZ
 
@@ -66,6 +62,10 @@ ENV FLYWHEEL /flywheel/v0
 RUN mkdir -p ${FLYWHEEL}
 
 COPY source/bin/dtiInitStandAloneWrapper /usr/local/bin/dtiInit
+# Ensure that the executable files are executable
+RUN chmod +x /usr/local/bin/bet2 && chmod +x /usr/local/bin/dtiInit
+
+
 
 # Copy and configure code
 COPY source/run \

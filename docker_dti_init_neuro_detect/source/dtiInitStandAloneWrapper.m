@@ -252,7 +252,7 @@ dlmwrite(J.bval_file, roundedBval, 'delimiter',' ');
 % it is much faster and the rest of the code relies in it anyways. 
 % First iteration, stop dtiInit doing it and later on mrtrixInit will paste
 % the fa to the bin folder. 
-% dtiInit(J.dwi_file, J.t1_file, dwParams);
+dtiInit(J.dwi_file, J.t1_file, dwParams);
 % disp('***************** IMPORTANT *****************')
 % disp(sprintf('Copying the following files from dtiInit to AFQ: %s and %s',J.t1_file,J.aparcaseg_file))
 % disp('***************** IMPORTANT *****************')
@@ -275,7 +275,7 @@ fprintf('Done.\n');
 
 %% Remove uncompressed output files
 
-% rmdir(J.output_dir, 's');
+rmdir(J.output_dir, 's');
 
 
 %% TODO: REPRODUCIBILITY!
