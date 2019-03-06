@@ -33,9 +33,9 @@ for archiv in glob(os.path.join(archivPath, "dti*.zip")):
     whereToFlip = whereToFlip.item() - 1
     parentDir = os.path.dirname(os.path.abspath(archivPath))
     bvecDir = os.path.join(parentDir, "input/bvec")
-    bvecPath = glob(bvecDir + '/*.bvecs')[0]
+    bvecPath = glob(bvecDir + '/*.bvec*')[0]
     bvalDir = os.path.join(parentDir, "input/bval")
-    bvalPath = glob(bvalDir + '/*.bvals')[0]
+    bvalPath = glob(bvalDir + '/*.bval*')[0]
     dwiDir = os.path.join(parentDir, 'input/dwi')
     dwiPath = glob(dwiDir + "/*.nii.gz")[0]
     originalName = os.path.basename(bvecPath)
