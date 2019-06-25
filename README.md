@@ -1,5 +1,5 @@
-neuro_detect
+RTP-bvec-flip-detect
 ==============================
 
-Neuro detect leverages the possibilities of deep learning to automatically detect and correct formatting errors of MRI scan data.
+Detects if there has been a flip in the sign of any of the directions in the bvec files and corrects it. 
 
